@@ -131,4 +131,90 @@ Configuration file: C:/tmp/jekyll/linux/_config.yml
 
 `Jekyll` 官方建议在 Windows 上更新一个插件，用来实时监控网站，无法在 Windows 上使用，但是不更新也没有关系，而且我也更新失败了。
 
+![jekyll]({{ "/images/Jekyll_show.png" | prepend: site.baseurl }})
+
+现在我的这个网站已经挂到 `github` 上去了，在外网的网址是 `http://linux.windard.com` 可以和 `github` 完美的使用。
+
+可是 `Jekyll` 的一些奇妙的属性让事情很难办，比如说它的所有页面都是自动生成的，要是我要自己写一个怎么办？还有 它的 css 是用 scaa 动态生成的，真是可怕，让我们来看一下它目前的结构树。
+
+```
+│  .gitignore
+│  about.md
+│  CNAME
+│  feed.xml
+│  Gemfile
+│  Gemfile.lock
+│  index.html
+│  README.md
+│  _config.yml
+│
+├─.sass-cache
+│  ├─185a322b0b47932f9163bb07f05c07e64a1c411b
+│  │      _base.scssc
+│  │      _layout.scssc
+│  │      _syntax-highlighting.scssc
+│  │
+│  └─9fe61a1e69f7769a9f2d30a4f8a73f43c8a3c643
+│          minima.scssc
+│
+├─css
+│      main.scss
+│
+├─images
+│      Jekyll_show.png
+│
+├─_posts
+│      2016-09-07-welcome-to-jekyll.markdown
+│      2016-09-08-Install-Jekyll-In-Windows.md
+│
+└─_site
+    │  CNAME
+    │  feed.xml
+    │  Gemfile
+    │  Gemfile.lock
+    │  index.html
+    │  README.md
+    │
+    ├─about
+    │      index.html
+    │
+    ├─css
+    │      main.css
+    │
+    ├─images
+    │      Jekyll_show.png
+    │
+    └─jekyll
+        ├─update
+        │  └─2016
+        │      └─09
+        │          └─07
+        │                  welcome-to-jekyll.html
+        │
+        └─windows
+            └─2016
+                └─09
+                    └─08
+                            Install-Jekyll-In-Windows.html
+```
+
+Jekyll 非常高端的可以把这个根目录下的内容全部动态生成 HTML 然后放在 `_site` 里。
+
+对了，我来试一下它能不能代码高亮。
+
+
+```python
+# coding=utf-8
+
+import sys,os
+
+print "hello world"
+
+sys.stdout.write("hello world")
+
+os.system("echo hello world")
+
+```
+
+
 更多详情，请看我的个人网站 [Windard](http://windard.com)
