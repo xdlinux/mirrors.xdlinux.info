@@ -25,3 +25,4 @@ github_username:  windard
 markdown: kramdown
 theme: minima
 port: 5001
+highlighter: rouge

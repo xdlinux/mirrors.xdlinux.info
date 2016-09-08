@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Xidian Linux</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel='stylesheet' href='{{ site.baseurl }}/css/main.css' />
+	<link rel='stylesheet' href='{{ site.baseurl }}/css/style.css' />
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/material.indigo-pink.min.css">
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/MaterialIcons.css">
+</head>
+<body>
+	<div class="container-fluid">
+		<header class="row">
+			<div class="col-sm-2 hidden-xs text-center">
+				<div class="brand">
+					<div class="brand-image">
+						<img src="images/logo_small.png" alt="" class="img-responsive img-circle">
+					</div>
+					<h6>西电开源社区</h6>
+					<p class="small">XIDIAN LINUX</p>
+				</div>
+			</div>
+			<div class="col-sm-10">
+				<div class="head-title">
+					<h2>Wiki Homepage</h2>
+					<p>Here is content for page intro. This paragraph is a simple demo, which shows the prefermence of this section</p>
+				</div>
+				<div class="head-navbar hidden-md hidden-lg hidden-sm text-right">
+					<ul class="navbar-list list-inline list-unstyled">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Wiki</a></li>
+						<li><a href="#">Mirrors</a></li>
+					</ul>
+				</div>
+			</div>
+		</header>
+		<div class="content row">
+			<div class="col-sm-2 hidden-xs text-center">
+				<ul class="list-unstyled slide-nav">
+					<li><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;Wiki</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp;Mirrors</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-10 main">
+				<div class="row">
+					<div class="col-md-8 server-status">
+						<div class="table-status">
+							<div class="mdl-spinner mdl-js-spinner is-active"></div>
+							<table class="table table-hover">
+								<thead><tr><td>Name</td><td>Last Update</td><td>Help</td></tr></thead>
+								<tbody></tbody></table>
+						</div>
+					</div>
+					<div class="col-md-4 cards">
+						{% for post in site.posts %}
+						<div class="card" data-url="{{ post.url }}">
+							<div class="card-head">
+									<h4>{{ post.title }}</h4>
+							</div>
+							<div class="card-body">
+								<p> {{ post.description }} </p>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+				<footer class="text-center">
+					<hr>
+					<p>Copyright Xidian <a href="http://linux.xidian.edu.cn">Linux</a></p>
+				</footer>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade bs-example-modal-lg" id="article" tabindex="-1" role="dialog" aria-labelledby="articleModal" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <a href="javascript:void(0)" class="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+	        <a href="javascript:void(0)" class="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+	      </div>
+	      <div class="modal-body">
+	        <div class="article-content">
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <p class="text-center">由joydandan于 4 weeks ago发布</p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+    <script src="{{ site.baseurl }}/js/jquery-1.11.3.min.js"></script>
+    <script src="{{ site.baseurl }}/js/bootstrap.min.js"></script>
+    <script src="{{ site.baseurl }}/js/material.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    	$("table thead").hide();
+		$(".card").click(function(event) {
+			url = $(this).data("url");
+			title = $(this).find("h4").text();
+			console.log(title);	
+			$.get(url,function(data){
+				$("div.article-content").empty();
+				$("div.article-content").append("<h4 class='text-center'>"+title+"</h4>");
+				$("div.article-content").append(data);
+				$("#article").modal('show');
+			})
+		});
+		$("a.prev").click(function(event){
+			console.log("hello world");
+			console.log("hello");
+		})
+		$.getJSON('http://127.0.0.1:8001/cgi-bin/Linux.py', function(jsondata, textStatus) {
+			$("div .mdl-spinner").hide();
+			$("table thead").show();
+			for(var item in jsondata){
+				var data = document.createElement('tr')
+				var $data=$(data);
+				if(jsondata[item].exitcode !== 0){
+					$data.addClass("danger");
+				}else{
+					$data.addClass('success');
+				}
+				$data.append("<td>"+item+"</td>"+"<td>"+jsondata[item].date+"</td>"+"<td><a href='#' >help</a></td>");
+				$("table tbody").append($data);
+			};
+			$(".slide-nav").height($(".main").height()-100)
+		});  
+	})
+    </script>
+</body>
+</html>

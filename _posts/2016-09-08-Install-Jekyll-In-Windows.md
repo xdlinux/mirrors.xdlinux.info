@@ -3,6 +3,7 @@ layout: post
 title:  在 Windows 上安装 Jekyll
 date:   2016-09-08 11:30
 categories: jekyll Windows
+description: 这是第一篇文章的吧，关于 这样用 `Jekyll` 搭建一个网站
 ---
 
 这是第一篇文章的吧，关于 这样用 `Jekyll` 搭建一个网站，首先你需要安装以下软件
