@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
-	<title>Xidian Linux</title>
+	<title>西电开源社区软件源</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel='stylesheet' href='{{ site.baseurl }}/css/main.css' />
@@ -25,8 +25,14 @@
 			</div>
 			<div class="col-sm-10">
 				<div class="head-title">
-					<h2>Wiki Homepage</h2>
-					<p>Here is content for page intro. This paragraph is a simple demo, which shows the prefermence of this section</p>
+					<h3>西电开源社区软件源</h3>
+					<p>Mirror Of XiDian Open Source Community(XDOSC)</p>
+					<div class="left-title">
+						<ul class="list-unstyled">
+							<li>邮件列表:https://groups.google.com/forum/#!forum/xidian_linux</li>
+							<li>联系方式：feedback@xdlinux.info</li>
+						</ul>
+					</div>
 				</div>
 				<div class="head-navbar hidden-md hidden-lg hidden-sm text-right">
 					<ul class="navbar-list list-inline list-unstyled">
@@ -51,8 +57,9 @@
 						<div class="table-status">
 							<div class="mdl-spinner mdl-js-spinner is-active"></div>
 							<table class="table table-hover">
-								<thead><tr><td>Name</td><td>Last Update</td><td>Help</td></tr></thead>
-								<tbody></tbody></table>
+								
+								<!-- <tbody></tbody> -->
+							</table>
 						</div>
 					</div>
 					<div class="col-md-4 cards">
@@ -63,6 +70,7 @@
 							</div>
 							<div class="card-body">
 								<p> {{ post.description }} </p>
+								<p> {{post.previous_page}} </p>
 							</div>
 						</div>
 						{% endfor %}
@@ -80,15 +88,15 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        <a href="javascript:void(0)" class="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-	        <a href="javascript:void(0)" class="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+	        <a href="javascript:void(0)" class="prev" data-url=""><span class="glyphicon glyphicon-chevron-left"></span></a>
+	        <a href="javascript:void(0)" class="next" data-url=""><span class="glyphicon glyphicon-chevron-right"></span></a>
 	      </div>
 	      <div class="modal-body">
 	        <div class="article-content">
 	        </div>
 	      </div>
 	      <div class="modal-footer">
-	        <p class="text-center">由joydandan于 4 weeks ago发布</p>
+	        <!-- <p class="text-center">由joydandan于 4 weeks ago发布</p> -->
 	      </div>
 	    </div>
 	  </div>
@@ -98,36 +106,53 @@
     <script src="{{ site.baseurl }}/js/material.min.js"></script>
     <script>
     $(document).ready(function(){
-    	$("table thead").hide();
 		$(".card").click(function(event) {
 			url = $(this).data("url");
+			prevurl = $(this).prev().data("url");
+			nexturl = $(this).next().data("url");
 			title = $(this).find("h4").text();
-			console.log(title);	
 			$.get(url,function(data){
 				$("div.article-content").empty();
 				$("div.article-content").append("<h4 class='text-center'>"+title+"</h4>");
 				$("div.article-content").append(data);
+				$("a.prev").data("url",prevurl);
+				$("a.next").data("url",nexturl);
 				$("#article").modal('show');
-			})
+			});
 		});
 		$("a.prev").click(function(event){
-			console.log("hello world");
-			console.log("hello");
+			// console.log($(this).data("url"));
+			url = $(this).data("url");
+			if(!url){
+				alert("已是第一篇");
+			}else{
+				$.get(url,function(data){
+					$("div.article-content").empty();
+					$("div.article-content").append("<h4 class='text-center'>"+title+"</h4>");
+					$("div.article-content").append(data);
+					$("a.prev").data("url",prevurl);
+					$("a.next").data("url",nexturl);
+					$("#article").modal('show');
+				});
+			}
+		});
+		$("a.next").click(function(event){
+			console.log($(this).data("url"));
 		})
+		// $.getJSON('http://windard.com/status/linux.php', function(jsondata, textStatus) {
 		$.getJSON('http://127.0.0.1:8001/cgi-bin/Linux.py', function(jsondata, textStatus) {
 			$("div .mdl-spinner").hide();
-			$("table thead").show();
+			$("table").append("<thead><tr><td>Name</td><td>Last Update</td><td>Help</td></tr></thead>");
+			data = ""
 			for(var item in jsondata){
-				var data = document.createElement('tr')
-				var $data=$(data);
 				if(jsondata[item].exitcode !== 0){
-					$data.addClass("danger");
+					data += "<tr class='danger'>";
 				}else{
-					$data.addClass('success');
+					data += "<tr class='success'>";
 				}
-				$data.append("<td>"+item+"</td>"+"<td>"+jsondata[item].date+"</td>"+"<td><a href='#' >help</a></td>");
-				$("table tbody").append($data);
+				data += "<td>"+item+"</td>"+"<td>"+jsondata[item].date+"</td>"+"<td><a href='#' >help</a></td></tr>";
 			};
+			$("table").append(data);
 			$(".slide-nav").height($(".main").height()-100)
 		});  
 	})

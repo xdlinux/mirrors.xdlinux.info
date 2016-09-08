@@ -26,3 +26,4 @@ markdown: kramdown
 theme: minima
 port: 5001
 highlighter: rouge
+paginate: 10
