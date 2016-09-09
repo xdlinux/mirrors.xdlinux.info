@@ -155,6 +155,10 @@ table tr{
     margin-bottom: 12px;
     line-height: 24px;
 }
+.head-title .col-sm-6{
+    height:400px;
+    text-align: center;
+}
  }
 @media screen and (min-width: 960px) {
 .main{
