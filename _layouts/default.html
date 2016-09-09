@@ -142,7 +142,7 @@
 		});
 		$("div.modal-content").delegate('a.prev','click',function(event){
 			if($("div.prevornext").children("span.prev").length){
-				url = $("span.prev").text(); 
+				url = $("div.prevornext span.prev").text(); 
 				$.get(url,function(data){
 					article = $(data);
 					title = article[0].innerHTML;
@@ -173,7 +173,7 @@
 		$("div.modal-content").delegate('a.next','click',function(event){
 			event.preventDefault();
 			if($("div.prevornext").children("span.next").length){
-				url = $("span.next").text();
+				url = $("div.prevornext span.next").text();
 				console.log(url); 
 				$.get(url,function(data){
 					article = $(data);
