@@ -1,1 +1,10 @@
+<span class="title" style="display:none">{{ page.title }}</span>
+<span class="date" style="display:none">{{ page.date|date:"%Y-%m-%d" }}</span>
+{% if page.previous %}
+<span class="next" style="display:none">{{ page.previous.url }}</span>
+{% endif %}
+{% if page.next %}
+<span class="prev" style="display:none">{{ page.next.url }}</span>
+{% endif %}
+
 {{ content }}

@@ -73,7 +73,6 @@
 							</div>
 							<div class="card-body">
 								<p> {{ post.description }} </p>
-								<p> {{post.previous_page}} </p>
 							</div>
 						</div>
 						{% endfor %}
@@ -91,15 +90,17 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        <a href="javascript:void(0)" class="prev" data-url=""><span class="glyphicon glyphicon-chevron-left"></span></a>
-	        <a href="javascript:void(0)" class="next" data-url=""><span class="glyphicon glyphicon-chevron-right"></span></a>
+	        <div class="prevornext">
+<!-- 				
+				 -->
+	        </div>
 	      </div>
 	      <div class="modal-body">
 	        <div class="article-content">
 	        </div>
 	      </div>
 	      <div class="modal-footer">
-	        <!-- <p class="text-center">由joydandan于 4 weeks ago发布</p> -->
+	        <p class="text-center"></p>
 	      </div>
 	    </div>
 	  </div>
@@ -111,39 +112,97 @@
     $(document).ready(function(){
 		$(".card").click(function(event) {
 			url = $(this).data("url");
-			prevurl = $(this).prev().data("url");
-			nexturl = $(this).next().data("url");
 			title = $(this).find("h4").text();
 			$.get(url,function(data){
+				article = $(data);
+				title = article[0].innerHTML;
+				date = article[2].innerHTML;
+				$("div.prevornext").empty();
+				if($(article[6]).hasClass('prev')){
+					prevurl = article[6].innerHTML;
+					$("div.prevornext").append("<span class='prev hidden'>"+prevurl+"</span>");
+					$("div.prevornext").append('<a href="#" class="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>&nbsp');
+				}
+				if($(article[4]).hasClass('next')){
+					nexturl = article[4].innerHTML;
+					$("div.prevornext").append("<span class='next hidden'>"+nexturl+"</span>");
+					$("div.prevornext").append('<a href="#" class="next"><span class="glyphicon glyphicon-chevron-right"></span></a>');
+				}else if($(article[4]).hasClass('prev')){
+					prevurl = article[4].innerHTML;
+					$("div.prevornext").append("<span class='prev hidden'>"+prevurl+"</span>");
+					$("div.prevornext").append('<a href="#" class="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>');
+				}
 				$("div.article-content").empty();
 				$("div.article-content").append("<h4 class='text-center'>"+title+"</h4>");
 				$("div.article-content").append(data);
-				$("a.prev").data("url",prevurl);
-				$("a.next").data("url",nexturl);
+				$("div.modal-footer p").empty();
+				$("div.modal-footer p").append(date+"发布");
 				$("#article").modal('show');
 			});
 		});
-		$("a.prev").click(function(event){
-			// console.log($(this).data("url"));
-			url = $(this).data("url");
-			if(!url){
-				alert("已是第一篇");
-			}else{
+		$("div.modal-content").delegate('a.prev','click',function(event){
+			if($("div.prevornext").children("span.prev").length){
+				url = $("span.prev").text(); 
 				$.get(url,function(data){
+					article = $(data);
+					title = article[0].innerHTML;
+					date = article[2].innerHTML;
+					$("div.prevornext").empty();
+					if($(article[6]).hasClass('prev')){
+						prevurl = article[6].innerHTML;
+						$("div.prevornext").append("<span class='prev hidden'>"+prevurl+"</span>");
+						$("div.prevornext").append('<a href="javascript:void(0)" class="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>&nbsp');
+					}
+					if($(article[4]).hasClass('next')){
+						nexturl = article[4].innerHTML;
+						$("div.prevornext").append("<span class='next hidden'>"+nexturl+"</span>");
+						$("div.prevornext").append('<a href="javascript:void(0)" class="next"><span class="glyphicon glyphicon-chevron-right"></span></a>');
+					}else if($(article[4]).hasClass('prev')){
+						prevurl = article[4].innerHTML;
+						$("div.prevornext").append("<span class='prev hidden'>"+prevurl+"</span>");
+						$("div.prevornext").append('<a href="javascript:void(0)" class="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>');
+					}
 					$("div.article-content").empty();
 					$("div.article-content").append("<h4 class='text-center'>"+title+"</h4>");
 					$("div.article-content").append(data);
-					$("a.prev").data("url",prevurl);
-					$("a.next").data("url",nexturl);
-					$("#article").modal('show');
+					$("div.modal-footer p").empty();
+					$("div.modal-footer p").append(date+"发布");
 				});
-			}
+			};
 		});
-		$("a.next").click(function(event){
-			console.log($(this).data("url"));
-		})
-		// $.getJSON('http://windard.com/status/linux.php', function(jsondata, textStatus) {
-		$.getJSON('http://127.0.0.1:8001/cgi-bin/Linux.py', function(jsondata, textStatus) {
+		$("div.modal-content").delegate('a.next','click',function(event){
+			event.preventDefault();
+			if($("div.prevornext").children("span.next").length){
+				url = $("span.next").text(); 
+				$.get(url,function(data){
+					article = $(data);
+					title = article[0].innerHTML;
+					date = article[2].innerHTML;
+					$("div.prevornext").empty();
+					if($(article[6]).hasClass('prev')){
+						prevurl = article[6].innerHTML;
+						$("div.prevornext").append("<span class='prev hidden'>"+prevurl+"</span>");
+						$("div.prevornext").append('<a href="javascript:void(0)" class="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>&nbsp');
+					}
+					if($(article[4]).hasClass('next')){
+						nexturl = article[4].innerHTML;
+						$("div.prevornext").append("<span class='next hidden'>"+nexturl+"</span>");
+						$("div.prevornext").append('<a href="javascript:void(0)" class="next"><span class="glyphicon glyphicon-chevron-right"></span></a>');
+					}else if($(article[4]).hasClass('prev')){
+						prevurl = article[4].innerHTML;
+						$("div.prevornext").append("<span class='prev hidden'>"+prevurl+"</span>");
+						$("div.prevornext").append('<a href="javascript:void(0)" class="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>');
+					}
+					$("div.article-content").empty();
+					$("div.article-content").append("<h4 class='text-center'>"+title+"</h4>");
+					$("div.article-content").append(data);
+					$("div.modal-footer p").empty();
+					$("div.modal-footer p").append(date+"发布");
+				});
+			};
+		});
+		$.getJSON('http://windard.com/status/linux.php', function(jsondata, textStatus) {
+		// $.getJSON('http://127.0.0.1:8001/cgi-bin/Linux.py', function(jsondata, textStatus) {
 			$("div .mdl-spinner").hide();
 			$("table").append("<thead><tr><td>Name</td><td>Last Update</td><td>Help</td></tr></thead>");
 			data = ""
