@@ -136,7 +136,7 @@
 				$("div.article-content").append("<h4 class='text-center'>"+title+"</h4>");
 				$("div.article-content").append(data);
 				$("div.modal-footer p").empty();
-				$("div.modal-footer p").append(date+"发布");
+				$("div.modal-footer p").append(date+" 发布");
 				$("#article").modal('show');
 			});
 		});
@@ -166,14 +166,15 @@
 					$("div.article-content").append("<h4 class='text-center'>"+title+"</h4>");
 					$("div.article-content").append(data);
 					$("div.modal-footer p").empty();
-					$("div.modal-footer p").append(date+"发布");
+					$("div.modal-footer p").append(date+" 发布");
 				});
 			};
 		});
 		$("div.modal-content").delegate('a.next','click',function(event){
 			event.preventDefault();
 			if($("div.prevornext").children("span.next").length){
-				url = $("span.next").text(); 
+				url = $("span.next").text();
+				console.log(url); 
 				$.get(url,function(data){
 					article = $(data);
 					title = article[0].innerHTML;
@@ -197,7 +198,7 @@
 					$("div.article-content").append("<h4 class='text-center'>"+title+"</h4>");
 					$("div.article-content").append(data);
 					$("div.modal-footer p").empty();
-					$("div.modal-footer p").append(date+"发布");
+					$("div.modal-footer p").append(date+" 发布");
 				});
 			};
 		});
