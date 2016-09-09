@@ -174,7 +174,6 @@
 			event.preventDefault();
 			if($("div.prevornext").children("span.next").length){
 				url = $("div.prevornext span.next").text();
-				console.log(url); 
 				$.get(url,function(data){
 					article = $(data);
 					title = article[0].innerHTML;
