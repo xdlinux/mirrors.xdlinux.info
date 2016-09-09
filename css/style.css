@@ -56,6 +56,9 @@ header p.small{
     z-index: 10;
     position: absolute;
 }
+.head-concat{
+    margin-top: 70px;
+}
 .slide-nav{
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
