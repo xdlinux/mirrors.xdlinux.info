@@ -212,15 +212,28 @@
 		$.get("{{ site.baseurl }}/js/status.json", function(jsondata) {
 			// symbolic link
 			$("div .mdl-spinner").hide();
-			$(".table").append("<thead><tr><td>Name</td><td>Last Update (UTC)</td><td>Help</td></tr></thead>");
-			data = ""
+			$(".table").append("<thead><tr><td>Name</td><td>Last Sync (UTC)</td><td>Help</td></tr></thead>");
+			var data = "";
 			for(var item in jsondata){
-				if(jsondata[item].exitcode !== 0){
+				var lastSync;
+				if(jsondata[item].status === 1) {	// Syncing
+					data += "<tr class='warning'>";
+					lastSync = "syncing";
+				} else if (jsondata[item].status === 2) {	// Done
+					lastSync = jsondata[item].date;
+					if(jsondata[item].exitcode === 0){
+						data += "<tr class='success'>";
+					} else {
+						data += "<tr class='danger'>";
+						lastSync += " (failed)";
+					}
+				} else {
 					data += "<tr class='danger'>";
-				}else{
-					data += "<tr class='success'>";
+					lastSync = jsondata[item].date + " (unknown status)";
 				}
-				data += "<td>"+"<a href='http://mirrors.xdlinux.info/"+item+"/'>"+item+"</a>"+"</td>"+"<td>"+jsondata[item].date+"</td>"+"<td><a href='#' >help</a></td></tr>";
+				data += "<td>"+"<a href='http://mirrors.xdlinux.info/"+item+"/'>"+item+"</a>"+"</td>"
+					+"<td>"+lastSync+"</td>"
+					+"<td><a href='#' >help</a></td></tr>";
 			};
 			$(".table").append(data);
 			$(".slide-nav").height($(".main").height()-100)
