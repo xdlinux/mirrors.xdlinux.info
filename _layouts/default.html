@@ -212,7 +212,7 @@
 		$.get("{{ site.baseurl }}/js/status.json", function(jsondata) {
 			// symbolic link
 			$("div .mdl-spinner").hide();
-			$(".table").append("<thead><tr><td>Name</td><td>Last Update</td><td>Help</td></tr></thead>");
+			$(".table").append("<thead><tr><td>Name</td><td>Last Update (UTC)</td><td>Help</td></tr></thead>");
 			data = ""
 			for(var item in jsondata){
 				if(jsondata[item].exitcode !== 0){
