@@ -6,8 +6,6 @@ categories: news
 description: this is a demo and a test for the website.
 ---
 
-## hello, world!
+this is a `demo` and a `test` for the website.
 
-this is a demo and a test for the website.
-
-it will coming soon. (hopefully)
+it is coming soon. (hopefully)
