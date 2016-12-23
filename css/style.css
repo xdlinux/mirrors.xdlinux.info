@@ -3,7 +3,7 @@ html::-webkit-scrollbar {
 }
 body{
     background-color: #f9f9f9;
-    font-family:Microsoft Yahei, Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+    font-family: "WenQuanYi Zen Hei", Arial, "Helvetica Neue", Helvetica, sans-serif !important;
 }
 a{
     text-decoration: none !important;
@@ -68,6 +68,7 @@ header p.small{
     height:600px;
     margin: 0 auto 0;
     background-color: #eaeaea;
+    font-family: "Source Code Pro", monospace;
     font-size: 12px;
     font-weight: bold;
 }
