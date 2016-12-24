@@ -13,13 +13,10 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Xidian Linux
-email: windard@windard.com
-description: 这是西电开源社区软件源，更多详情请邮件联系
+title: 西电开源软件镜像站
+description: ""
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://127.0.0.1:5001" # the base hostname & protocol for your site
-# twitter_username: windard
-github_username:  windard
+url: "http://127.0.0.1:4000" # the base hostname & protocol for your site
 
 # Build settings
 markdown: kramdown
