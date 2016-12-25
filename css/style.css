@@ -3,7 +3,7 @@ html::-webkit-scrollbar {
 }
 body{
     background-color: #f9f9f9;
-    font-family: "WenQuanYi Zen Hei", Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+    font-family: "WenQuanYi Zen Hei", "Microsoft Yahei", Arial, "Helvetica Neue", Helvetica, sans-serif !important;
 }
 a{
     text-decoration: none !important;
@@ -28,7 +28,8 @@ header:hover{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     margin: 0 auto 0;
-    width:70%;
+    max-width: 150px;
+    min-width: 100px;
     padding: 10px 10px 5px;
     background-color: #dcdcdc;
 }
@@ -38,6 +39,7 @@ header:hover{
     margin: 0 auto 0;
 }
 .brand h6{
+    font-family: "WenQuanYi Zen Hei", "Microsoft Yahei", Arial, "Helvetica Neue", Helvetica, sans-serif !important;
     margin: 8px 0 0px;
 }
 header p.small{
@@ -64,11 +66,12 @@ header p.small{
     border-bottom-right-radius: 3px;
     padding: 30px 0 10px;
     /* box-shadow: 0 3px 2px 2px #ddd; */
-    width: 70%;
-    height:600px;
+    max-width: 150px;
+    min-width: 100px;
+    height: 600px;
     margin: 0 auto 0;
     background-color: #eaeaea;
-    font-family: "Source Code Pro", monospace;
+    font-family: "Source Code Pro", "Consolas", "Courier New", Courier, monospace;
     font-size: 12px;
     font-weight: bold;
 }
@@ -170,7 +173,19 @@ table tr{
 .backToTop:hover{
     opacity: 1;
 }
-@media screen and (max-width:760px) { 
+.head-title h3{
+    font-family: "WenQuanYi Zen Hei", "Microsoft Yahei", Arial, "Helvetica Neue", Helvetica, sans-serif !important;
+    font-size: 28px !important;
+    margin-bottom: 22px;
+}
+.head-title h6{
+    font-size: 16px !important;
+    margin-top: 22px;
+}
+@media screen and (max-width:760px) {
+body {
+    min-width: 400px;
+}
 .main{
     margin-left: 0px;
 }
