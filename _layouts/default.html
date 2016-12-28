@@ -231,10 +231,12 @@
 					data += "<tr class='danger'>";
 					syncStatus = "unknown";
 				}
+				var helpUrl = "help/" + item + ".html";
+				var helpLink = "<a href='" + helpUrl + "'>help</a>";
 				data += "<td>" + "<a href='http://mirrors.xdlinux.info/"+item+"/'>" + item + "</a>" + "</td>"
 					+ "<td>" + jsondata[item].date + "</td>"
 					+ "<td>" + syncStatus + "</td>"
-					+ "<td><a href='#' >help</a></td></tr>";
+					+ "<td>" + helpLink + "</td></tr>";
 			};
 			$(".table").append(data);
 			$(".slide-nav").height($(".main").height()-100)
@@ -251,7 +253,7 @@
 		};
 
 		backToTopEle.hide();
-	    	jQuery(window).bind("scroll", backToTopFun);
+		jQuery(window).bind("scroll", backToTopFun);
 		jQuery('div.main a,div.pic a').attr('target', '_blank');
 	})
     </script>
