@@ -49,9 +49,11 @@
 				<div class="head-navbar hidden-md hidden-lg hidden-sm text-right">
 					<ul class="navbar-list list-inline list-unstyled">
 						<li><a href="{{ site.baseurl }}">Home</a></li>
+                                                <!--
 						<li><a href="{{ site.baseurl }}/wiki">Wiki</a></li>
 						<li><a href="{{ site.baseurl }}/bbs">BBS</a></li>
-						<li><a href="{{ site.baseurl }}/mirror">Mirrors</a></li>
+                                                -->
+						<li><a href="http://mirrors.xdlinux.info/">Mirrors</a></li>
 						<li><a href="{{ site.baseurl }}/status">Status</a></li>
 					</ul>
 				</div>
@@ -61,10 +63,12 @@
 			<div class="col-sm-2 hidden-xs text-center">
 				<ul class="list-unstyled slide-nav">
 					<a href="{{ site.baseurl }}"><li><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</li></a>
+                                        <!--
 					<a href="{{ site.baseurl }}/wiki"><li><span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;Wiki</li></a>
 					<a href="{{ site.baseurl }}/bbs"><li><span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;BBS</li></a>
-					<a href="{{ site.baseurl }}/mirror"><li><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp;Mirror</li></a>
-					<a href="{{ site.baseurl }}/status"><li><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp;Status</li></a>
+                                        -->
+					<a href="http://mirrors.xdlinux.info/"><li><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp;Mirror</li></a>
+					<a href="{{ site.baseurl }}/status"><li><span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;Status</li></a>
 				</ul>
 			</div>
 			<div class="col-sm-10 main">
@@ -92,7 +96,7 @@
 				</div>
 				<footer class="text-center">
 					<hr>
-					<p>© 2016 <a href="https://github.com/xdlinux">Xidian Open Source Community</a></p>
+					<p>© 2008-2017 <a href="https://github.com/xdlinux">Xidian Open Source Community</a></p>
 				</footer>
 			</div>
 		</div>
@@ -213,7 +217,7 @@
 				});
 			};
 		});
-		$.get("{{ site.baseurl }}/js/status.json", function(jsondata) {
+		$.get("{{ site.baseurl }}/status.json", function(jsondata) {
 			// symbolic link
 			$("div .mdl-spinner").hide();
 			$(".table").append("<thead><tr><td>Name</td><td>Last Update (UTC)</td><td>Sync Status</td><td>Help</td></tr></thead>");
