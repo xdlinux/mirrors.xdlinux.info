@@ -52,6 +52,7 @@
 						<li><a href="{{ site.baseurl }}/status">Status</a></li>
 						<li><a href="{{ site.baseurl }}/mirrors">Mirrors</a></li>
 						<li><a href="http://xdlinux.info:9095">Gogs</a></li>
+						<li><a href="https://xdlinux.info/static/xdlinux.html">Xdlinux</a></li>
 					</ul>
 				</div>
 			</div>
@@ -60,9 +61,13 @@
 			<div class="col-sm-2 hidden-xs text-center">
 				<ul class="list-unstyled slide-nav">
 					<a href="{{ site.baseurl }}"><li><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</li></a>
-					<a href="{{ site.baseurl }}/status"><li><span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;Status</li></a>
+					<a href="{{ site.baseurl }}/status"><li><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>&nbsp;Status</li></a>
+					<!--
+					<a href="{{ site.baseurl }}/wiki"><li><span class="glyphicon glyphicon-file" aria-hidden="true"></span>&nbsp;Wiki</li></a>
+					-->
 					<a href="{{ site.baseurl }}/mirrors"><li><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp;Mirrors</li></a>
 					<a href="http://xdlinux.info:9095"><li><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;Gogs</li></a>
+					<a href="https://xdlinux.info/static/xdlinux.html"><li><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>&nbsp;Xdlinux</li></a>
 				</ul>
 			</div>
 			<div class="col-sm-10 main">
@@ -218,26 +223,31 @@
 			var data = "";
 			for(var item in jsondata){
 				var syncStatus;
+				var syncIcon;
 				if(jsondata[item].status === 1) {	// Syncing
 					data += "<tr class='warning'>";
 					syncStatus = "syncing";
+					syncIcon = "glyphicon glyphicon-info-sign";
 				} else if (jsondata[item].status === 2) {	// Done
 					if(jsondata[item].exitcode === 0){
 						data += "<tr class='success'>";
 						syncStatus = "success";
+						syncIcon = "glyphicon glyphicon-ok-sign";
 					} else {
 						data += "<tr class='danger'>";
 						syncStatus = "failed";
+						syncIcon = "glyphicon glyphicon-remove-sign";
 					}
 				} else {
 					data += "<tr class='danger'>";
 					syncStatus = "unknown";
+						syncIcon = "glyphicon glyphicon-question-sign";
 				}
 				var helpUrl = "help/" + item + ".html";
 				var helpLink = "<a href='" + helpUrl + "'>help</a>";
 				data += "<td>" + "<a href='http://mirrors.xdlinux.info/"+item+"/'>" + item + "</a>" + "</td>"
 					+ "<td>" + jsondata[item].date + "</td>"
-					+ "<td>" + syncStatus + "</td>"
+					+ "<td><span class='" + syncIcon + "' aria-hidden='true'>" + syncStatus + "</td>"
 					+ "<td>" + helpLink + "</td></tr>";
 			};
 			$(".table").append(data);
