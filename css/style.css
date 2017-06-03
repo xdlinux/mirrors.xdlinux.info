@@ -210,10 +210,6 @@ table tr{
 		right: 50px;
 	}
 }
-.withComment {
-	position: relative;
-	display: inline-block;
-}
 
 .withComment .comment {
 	visibility: hidden;
