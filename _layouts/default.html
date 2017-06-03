@@ -222,6 +222,7 @@
 			$(".table").append("<thead><tr><td>Name</td><td>Last Update (UTC)</td><td>Sync Status</td><td>Help</td></tr></thead>");
 			var data = "";
 			for(var item in jsondata){
+				var syncMessage = jsondata[item].message;
 				var syncStatus = "";
 				var syncIcon = "";
 				if(jsondata[item].status === 1) {	// Syncing
@@ -246,7 +247,7 @@
 				var helpLink = "<a href='help/" + item + ".html'>help</a>";
 				data += "<td>" + "<a href='https://mirrors.xdlinux.info/"+item+"/'>" + item + "</a>" + "</td>"
 					+ "<td>" + jsondata[item].date + "</td>"
-					+ "<td class='withComment'>" + syncIcon + "<span class='comment'>" + syncStatus + "</span></td>"
+					+ "<td class='withComment'>" + syncIcon + "<span class='comment'>" + syncMessage + "</span></td>"
 					+ "<td>" + helpLink + "</td></tr>";
 			};
 			$(".table").append(data);
