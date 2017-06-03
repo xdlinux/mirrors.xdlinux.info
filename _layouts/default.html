@@ -227,25 +227,25 @@
 				if(jsondata[item].status === 1) {	// Syncing
 					data += "<tr class='warning'>";
 					syncStatus = "syncing";
-					syncIcon = "glyphicon glyphicon-info-sign";
+					syncIcon = "glyphicon glyphicon-refresh";
 				} else if (jsondata[item].status === 2) {	// Done
 					if(jsondata[item].exitcode === 0){
 						data += "<tr class='success'>";
 						syncStatus = "success";
-						syncIcon = "glyphicon glyphicon-ok-sign";
+						syncIcon = "glyphicon glyphicon-ok";
 					} else {
 						data += "<tr class='danger'>";
 						syncStatus = "failed";
-						syncIcon = "glyphicon glyphicon-remove-sign";
+						syncIcon = "glyphicon glyphicon-remove";
 					}
 				} else {
 					data += "<tr class='danger'>";
 					syncStatus = "unknown";
-						syncIcon = "glyphicon glyphicon-question-sign";
+					syncIcon = "glyphicon glyphicon-minus";
 				}
 				var helpUrl = "help/" + item + ".html";
 				var helpLink = "<a href='" + helpUrl + "'>help</a>";
-				data += "<td>" + "<a href='http://mirrors.xdlinux.info/"+item+"/'>" + item + "</a>" + "</td>"
+				data += "<td>" + "<a href='https://mirrors.xdlinux.info/"+item+"/'>" + item + "</a>" + "</td>"
 					+ "<td>" + jsondata[item].date + "</td>"
 					+ "<td><span class='" + syncIcon + "' aria-hidden='true'>" + syncStatus + "</td>"
 					+ "<td>" + helpLink + "</td></tr>";
