@@ -222,32 +222,31 @@
 			$(".table").append("<thead><tr><td>Name</td><td>Last Update (UTC)</td><td>Sync Status</td><td>Help</td></tr></thead>");
 			var data = "";
 			for(var item in jsondata){
-				var syncStatus;
-				var syncIcon;
+				var syncStatus = "";
+				var syncIcon = "";
 				if(jsondata[item].status === 1) {	// Syncing
 					data += "<tr class='warning'>";
 					syncStatus = "syncing";
-					syncIcon = "glyphicon glyphicon-refresh";
+					syncIcon = "<span class='glyphicon glyphicon-refresh' aria-hidden='true'>";
 				} else if (jsondata[item].status === 2) {	// Done
 					if(jsondata[item].exitcode === 0){
 						data += "<tr class='success'>";
 						syncStatus = "success";
-						syncIcon = "glyphicon glyphicon-ok";
+						syncIcon = "<span class='glyphicon glyphicon-ok' aria-hidden='true'>";
 					} else {
 						data += "<tr class='danger'>";
 						syncStatus = "failed";
-						syncIcon = "glyphicon glyphicon-remove";
+						syncIcon = "<span class='glyphicon glyphicon-remove' aria-hidden='true'>";
 					}
 				} else {
 					data += "<tr class='danger'>";
 					syncStatus = "unknown";
-					syncIcon = "glyphicon glyphicon-minus";
+					syncIcon = "<span class='glyphicon glyphicon-minus' aria-hidden='true'>";
 				}
-				var helpUrl = "help/" + item + ".html";
-				var helpLink = "<a href='" + helpUrl + "'>help</a>";
+				var helpLink = "<a href='help/" + item + ".html'>help</a>";
 				data += "<td>" + "<a href='https://mirrors.xdlinux.info/"+item+"/'>" + item + "</a>" + "</td>"
 					+ "<td>" + jsondata[item].date + "</td>"
-					+ "<td><span class='" + syncIcon + "' aria-hidden='true'>" + syncStatus + "</td>"
+					+ "<td class='withComment'>" + syncIcon + "<span class='comment'>" + syncStatus + "</span></td>"
 					+ "<td>" + helpLink + "</td></tr>";
 			};
 			$(".table").append(data);
