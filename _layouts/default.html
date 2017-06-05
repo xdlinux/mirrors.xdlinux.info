@@ -5,8 +5,8 @@
 	<title>{{ site.title }}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel='stylesheet' href='{{ site.baseurl }}/css/main.css' />
-	<link rel='stylesheet' href='{{ site.baseurl }}/css/style.css' />
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/main.css" />
+	<link rel="stylesheet" href="{{ site.baseurl }}/css/style.css" />
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/bootstrap.min.css">
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/material.indigo-pink.min.css">
 	<link rel="stylesheet" href="{{ site.baseurl }}/css/MaterialIcons.css">
@@ -217,39 +217,57 @@
 			};
 		});
 		$.get("{{ site.baseurl }}/status.json", function(jsondata) {
-			// symbolic link
+
 			$("div .mdl-spinner").hide();
-			$(".table").append("<thead><tr><td>Name</td><td>Last Update (UTC)</td><td>Sync Status</td><td>Help</td></tr></thead>");
+
+			$(".table").append(
+				"<thead><tr>"
+				+ "<td>Name</td>"
+				+ "<td>Last Update (UTC)</td>"
+				+ "<td>Sync Status</td>"
+				+ "<td>Help</td>"
+				+ "</tr></thead>"
+			);
+
 			var data = "";
+
 			for(var item in jsondata){
-				var statusIcon = "";
-				var statusComment = "";
+
+				// default: Unknown
+				var trType = "danger";
+				var statusIconName = "glyphicon-minus";
+
 				if(jsondata[item].status === 1) {
 					// Syncing
-					data += "<tr class='warning'>";
-					statusIcon = "<span class='glyphicon glyphicon-refresh' aria-hidden='true'></span>";
+					trType = "warning";
+					statusIconName = "glyphicon-refresh";
 				} else if (jsondata[item].status === 2) {
 					// Done
 					if(jsondata[item].exitcode === 0){
 						// Success
-						data += "<tr class='success'>";
-						statusIcon = "<span class='glyphicon glyphicon-ok' aria-hidden='true'></span>";
+						trType = "success";
+						statusIconName = "glyphicon-ok";
 					} else {
 						// Failed
-						data += "<tr class='danger'>";
-						statusIcon = "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span>";
-						statusComment = "<span class='comment'>" + jsondata[item].message + "</span>";
+						trType = "danger";
+						statusIconName = "glyphicon-remove";
 					}
-				} else {
-					// Unknown
-					data += "<tr class='danger'>";
-					statusIcon = "<span class='glyphicon glyphicon-minus' aria-hidden='true'></span>";
 				}
+
+				var mirrorLink = "<a href='https://mirrors.xdlinux.info/" + item + "/'>" + item + "</a>";
 				var helpLink = "<a href='help/" + item + ".html'>help</a>";
-				data += "<td>" + "<a href='https://mirrors.xdlinux.info/"+item+"/'>" + item + "</a>" + "</td>"
-					+ "<td>" + jsondata[item].date + "</td>"
+
+				var statusIcon = "<span class='glyphicon " + statusIconName + "' aria-hidden='true'></span>";
+				var statusComment = "<span class='comment'>" + jsondata[item].message + "</span>";
+
+				var lastUpdate = jsondata[item].date;
+
+				data += "<tr class='" + trType + "'>"
+					+ "<td>" + mirrorLink + "</td>"
+					+ "<td>" + lastUpdate + "</td>"
 					+ "<td class='withComment'>" + statusIcon + statusComment + "</td>"
-					+ "<td>" + helpLink + "</td></tr>";
+					+ "<td>" + helpLink + "</td>"
+					+ "</tr>";
 			};
 			$(".table").append(data);
 			$(".slide-nav").height($(".main").height()-100)
