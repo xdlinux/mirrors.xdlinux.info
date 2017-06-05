@@ -227,23 +227,23 @@
 				if(jsondata[item].status === 1) {
 					// Syncing
 					data += "<tr class='warning'>";
-					statusIcon = "<span class='glyphicon glyphicon-refresh' aria-hidden='true'>";
+					statusIcon = "<span class='glyphicon glyphicon-refresh' aria-hidden='true'></span>";
 				} else if (jsondata[item].status === 2) {
 					// Done
 					if(jsondata[item].exitcode === 0){
 						// Success
 						data += "<tr class='success'>";
-						statusIcon = "<span class='glyphicon glyphicon-ok' aria-hidden='true'>";
+						statusIcon = "<span class='glyphicon glyphicon-ok' aria-hidden='true'></span>";
 					} else {
 						// Failed
 						data += "<tr class='danger'>";
-						statusIcon = "<span class='glyphicon glyphicon-remove' aria-hidden='true'>";
+						statusIcon = "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span>";
 						statusComment = "<span class='comment'>" + jsondata[item].message + "</span>";
 					}
 				} else {
 					// Unknown
 					data += "<tr class='danger'>";
-					statusIcon = "<span class='glyphicon glyphicon-minus' aria-hidden='true'>";
+					statusIcon = "<span class='glyphicon glyphicon-minus' aria-hidden='true'></span>";
 				}
 				var helpLink = "<a href='help/" + item + ".html'>help</a>";
 				data += "<td>" + "<a href='https://mirrors.xdlinux.info/"+item+"/'>" + item + "</a>" + "</td>"
