@@ -216,7 +216,7 @@ table tr{
 
 .withComment .comment {
 	visibility: hidden;
-	width: 120px;
+	width: 80px;
 	background-color: #eaeaea;
 	color: #333;
 	text-align: center;
