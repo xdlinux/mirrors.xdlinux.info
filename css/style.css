@@ -95,7 +95,6 @@ header p.small{
 	padding: 10px;
 }
 .server-status>.table-status{
-	cursor: pointer;
 	background-color: #fafafa;
 	padding: 20px;
 	border:1px solid transparent;
@@ -209,6 +208,10 @@ table tr{
 	.backToTop {
 		right: 50px;
 	}
+}
+
+.withComment .glyphicon {
+	cursor: help;
 }
 
 .withComment .comment {
