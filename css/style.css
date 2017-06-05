@@ -211,7 +211,7 @@ table tr{
 }
 
 .withComment .glyphicon {
-	cursor: help;
+	cursor: default;
 }
 
 .withComment .comment {
