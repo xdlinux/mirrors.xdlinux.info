@@ -234,15 +234,23 @@
 			for(var item in jsondata){
 
 				// default: Unknown
+				var statusMessage = "Unknown";
+				var lastUpdate = "never"
 				var trType = "danger";
 				var statusIconName = "glyphicon-minus";
 
 				if(jsondata[item].status === 1) {
 					// Syncing
+					statusMessage = "Syncing";
+					lastUpdate = jsondata[item].date;
+
 					trType = "warning";
 					statusIconName = "glyphicon-refresh";
 				} else if (jsondata[item].status === 2) {
 					// Done
+					statusMessage = jsondata[item].message;
+					lastUpdate = jsondata[item].date;
+
 					if(jsondata[item].exitcode === 0){
 						// Success
 						trType = "success";
@@ -258,9 +266,7 @@
 				var helpLink = "<a href='help/" + item + ".html'>help</a>";
 
 				var statusIcon = "<span class='glyphicon " + statusIconName + "' aria-hidden='true'></span>";
-				var statusComment = "<span class='comment'>" + jsondata[item].message + "</span>";
-
-				var lastUpdate = jsondata[item].date;
+				var statusComment = "<span class='comment'>" + statusMessage + "</span>";
 
 				data += "<tr class='" + trType + "'>"
 					+ "<td>" + mirrorLink + "</td>"
