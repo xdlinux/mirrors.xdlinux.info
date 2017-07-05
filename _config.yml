@@ -16,7 +16,7 @@
 title: 西电开源软件镜像站
 description: ""
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://mirrors.xdlinux.info" # the base hostname & protocol for your site
+url: "https://xdlinux.info" # the base hostname & protocol for your site
 
 # Build settings
 markdown: kramdown
