@@ -6,8 +6,6 @@ categories: news
 description: "https://git.xdlinux.info"
 ---
 
-# 西电最大Git代码托管网站上线啦
-
 新链接：[https://git.xdlinux.info](https://git.xdlinux.info)  
 旧链接：[http://xdlinux.info:9095](http://xdlinux.info:9095)  
 
