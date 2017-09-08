@@ -20,7 +20,7 @@ url: "https://xdlinux.info" # the base hostname & protocol for your site
 
 # Build settings
 markdown: kramdown
-theme: minima
 port: 4000
 highlighter: rouge
+# theme: minima
 # paginate: 10
